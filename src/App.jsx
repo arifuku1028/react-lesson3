@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./router/Router";
 import { InputTodo } from "./components/InputTodo";
-import { IncompleteTodos } from "./components/IncompleteTodos";
+// import { IncompleteTodos } from "./components/IncompleteTodos";
 import { CompleteTodos } from "./components/CompleteTodos";
 import "./styles.css";
 
@@ -15,7 +17,11 @@ export const App = () => {
   // '追加'ボタンの処理
   const onClickAdd = () => {
     if (todoText === "") return;
-    const newTodos = [...incompleteTodos, todoText];
+    const newTodo = {
+      id: Date.now(),
+      content: todoText,
+    };
+    const newTodos = [...incompleteTodos, newTodo];
     setIncompleteTodos(newTodos);
     setTodoText("");
   };
@@ -48,7 +54,7 @@ export const App = () => {
   };
 
   return (
-    <>
+    <BrowserRouter>
       <InputTodo
         todoText={todoText}
         onChange={onChangeTodoText}
@@ -60,12 +66,12 @@ export const App = () => {
           登録できるTODOは5個までです!消化してください！
         </p>
       )}
-      <IncompleteTodos
+      <Router
         todos={incompleteTodos}
         onClickComplete={onClickComplete}
         onClickDelete={onClickDelete}
-      />
+      ></Router>
       <CompleteTodos todos={completeTodos} onClickBack={onClickBack} />
-    </>
+    </BrowserRouter>
   );
 };

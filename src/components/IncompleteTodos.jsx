@@ -1,8 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 
 export const IncompleteTodos = (props) => {
   const { todos, onClickComplete, onClickDelete } = props;
+  const navigate = useNavigate();
+  const onClickDetail = (index) => {
+    navigate(`/${index}`, { state: todos });
+  };
 
   return (
     <div css={containerStyle}>
@@ -11,7 +16,8 @@ export const IncompleteTodos = (props) => {
         {todos.map((todo, index) => {
           return (
             <div key={index} className="list-row">
-              <li>{todo}</li>
+              <li>{todo.content}</li>
+              <button onClick={() => onClickDetail(index)}>詳細</button>
               <button onClick={() => onClickComplete(index)}>完了</button>
               <button onClick={() => onClickDelete(index)}>削除</button>
             </div>
