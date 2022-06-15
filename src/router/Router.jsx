@@ -1,24 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import { IncompleteTodos } from "../components/IncompleteTodos";
+import { TodoMenu } from "../components/TodoMenu";
+import { InputTodo } from "../components/InputTodo";
+import { TodoList } from "../components/TodoList";
 import { TodoDetail } from "../components/TodoDetail";
 
-export const Router = (props) => {
-  const { todos, onClickComplete, onClickDelete } = props;
-
+export const Router = () => {
   return (
     <Routes>
-      <Route
-        exact
-        path=""
-        element={
-          <IncompleteTodos
-            todos={todos}
-            onClickComplete={onClickComplete}
-            onClickDelete={onClickDelete}
-          />
-        }
-      ></Route>
-      <Route exact path=":index" element={<TodoDetail todos={todos} />}></Route>
+      <Route path="" element={<TodoMenu />} />
+      <Route path="new" element={<InputTodo />} />
+      <Route path=":list_name">
+        <Route path="" element={<TodoList />} />
+        <Route path=":index" element={<TodoDetail />} />
+      </Route>
     </Routes>
   );
 };

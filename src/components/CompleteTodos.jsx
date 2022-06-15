@@ -2,21 +2,30 @@
 import { css } from "@emotion/react";
 
 export const CompleteTodos = (props) => {
-  const { todos, onClickBack } = props;
+  const {
+    todos,
+    onClickDetail,
+    onClickReturn,
+    onClickDelete,
+    onClickBackToMenu,
+  } = props;
 
   return (
     <div css={containerStyle} className="complete-area">
-      <p className="title">完了のTOOD</p>
+      <p className="title">完了したTOOD</p>
       <ul>
         {todos.map((todo, index) => {
           return (
-            <div key="{index}" className="list-row">
+            <div key={index} className="list-row">
               <li>{todo.content}</li>
-              <button onClick={() => onClickBack(index)}>戻す</button>
+              <button onClick={() => onClickDetail(index)}>詳細</button>
+              <button onClick={() => onClickReturn(index)}>戻す</button>
+              <button onClick={() => onClickDelete(index)}>削除</button>
             </div>
           );
         })}
       </ul>
+      <button onClick={onClickBackToMenu}>メニューに戻る</button>
     </div>
   );
 };

@@ -1,17 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useNavigate } from "react-router-dom";
 
 export const IncompleteTodos = (props) => {
-  const { todos, onClickComplete, onClickDelete } = props;
-  const navigate = useNavigate();
-  const onClickDetail = (index) => {
-    navigate(`/${index}`, { state: todos });
-  };
+  const {
+    todos,
+    onClickDetail,
+    onClickComplete,
+    onClickDelete,
+    onClickBackToMenu,
+  } = props;
 
   return (
-    <div css={containerStyle}>
-      <p className="title">未完了のTODO</p>
+    <div css={containerStyle} className="complete-area">
+      <p className="title">未完了のTOOD</p>
       <ul>
         {todos.map((todo, index) => {
           return (
@@ -24,6 +25,7 @@ export const IncompleteTodos = (props) => {
           );
         })}
       </ul>
+      <button onClick={onClickBackToMenu}>メニューに戻る</button>
     </div>
   );
 };
