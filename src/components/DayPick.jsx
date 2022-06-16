@@ -8,10 +8,10 @@ import { usePopper } from "react-popper";
 import "react-day-picker/dist/style.css";
 
 export const DayPick = (props) => {
-  const { deadline, setDeadline } = props;
+  const { dateString, setDateString } = props;
 
   const [selected, setSelected] = useState();
-  const [inputValue, setInputValue] = useState(deadline);
+  const [inputValue, setInputValue] = useState(dateString);
   const [isPopperOpen, setIsPopperOpen] = useState(false);
 
   const popperRef = useRef(null);
@@ -38,10 +38,10 @@ export const DayPick = (props) => {
     const date = parse(newInputValue, "y-MM-dd", new Date());
     if (isValid(date)) {
       setSelected(date);
-      setDeadline(format(date, "y-MM-dd"));
+      setDateString(format(date, "y-MM-dd"));
     } else {
       setSelected(undefined);
-      setDeadline("");
+      setDateString("");
     }
   };
 
@@ -50,11 +50,11 @@ export const DayPick = (props) => {
     setSelected(date);
     if (date) {
       setInputValue(format(date, "y-MM-dd"));
-      setDeadline(format(date, "y-MM-dd"));
+      setDateString(format(date, "y-MM-dd"));
       closePopper();
     } else {
       setInputValue("");
-      setDeadline("");
+      setDateString("");
     }
   };
 

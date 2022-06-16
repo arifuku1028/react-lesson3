@@ -17,10 +17,10 @@ export const CompleteTodos = (props) => {
         {todos.map((todo, index) => {
           return (
             <div key={index} className="list-row">
-              <li>{todo.content}</li>
+              <li>{todo.name}</li>
               <button onClick={() => onClickDetail(index)}>詳細</button>
               <button onClick={() => onClickReturn(index)}>戻す</button>
-              <button onClick={() => onClickDelete(index)}>削除</button>
+              <button onClick={() => onClickDelete(index, todos)}>削除</button>
             </div>
           );
         })}
